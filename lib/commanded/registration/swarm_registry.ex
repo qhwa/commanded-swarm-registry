@@ -7,6 +7,7 @@ defmodule Commanded.Registration.SwarmRegistry do
   @behaviour Commanded.Registration.Adapter
 
   alias Commanded.Registration.SwarmRegistry.Monitor
+  require Logger
 
   @doc """
   Return an optional supervisor spec for the registry
@@ -81,7 +82,8 @@ defmodule Commanded.Registration.SwarmRegistry do
   end
 
   @doc false
-  def handle_call(_request, _from, _state) do
+  def handle_call(request, _from, _state) do
+    Logger.error(["NO_HANDLE_CALL: ", inspect(request)])
     raise "attempted to call GenServer #{inspect(proc())} but no handle_call/3 clause was provided"
   end
 
